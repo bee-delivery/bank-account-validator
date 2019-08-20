@@ -1,0 +1,13 @@
+{
+    "name": "bee-delivery/bank-account-validator",
+    "description": "A bank account validator",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Bee delivery",
+            "email": "suporte@beedelivery.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
