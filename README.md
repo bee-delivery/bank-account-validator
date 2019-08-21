@@ -18,7 +18,7 @@ The agency and account number of banks Itaú, Bradesco, and Banco do Brasil are 
 Install with [composer](https://getcomposer.org/):
 
 ```bash
-composer require bee-delivery/bank-account-validator-php
+composer require bee-delivery/bank-account-validator
 ```
 
 ## Usage
