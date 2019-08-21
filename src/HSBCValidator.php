@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace BankAccountValidator\src;
 
-class ItauValidator
+class HSBCValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -14,11 +14,11 @@ class ItauValidator
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == ItauValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == HSBCValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
-        return CommonBankAccountValidator::accountCheckNumberIsValid($accountCheckNumber);
+        return true;
     }
 
     static function agencyCheckNumberMatch($bankAccount) {
@@ -26,8 +26,7 @@ class ItauValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        $checkNumberCalculated = ItauCheckNumberCalculator::calculate($bankAccount->agencyNumber, $bankAccount->accountNumber);
-        return $checkNumberCalculated === $bankAccount->accountCheckNumber;
+        return true;
     }
 
     static function agencyNumberMsgError() {
@@ -39,11 +38,11 @@ class ItauValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(ItauValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(HSBCValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 5;
+        return 6;
     }
 
 }

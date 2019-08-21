@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace BankAccountValidator\src;
 
-class SantanderValidator
+class BanrisulValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -14,7 +14,7 @@ class SantanderValidator
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == SantanderValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == BanrisulValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
@@ -26,7 +26,8 @@ class SantanderValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        return true;
+        $checkNumberCalculated = BanrisulCheckNumberCalculator::calculate($bankAccount->accountNumber);
+        return $checkNumberCalculated === $bankAccount->accountCheckNumber;
     }
 
     static function agencyNumberMsgError() {
@@ -38,11 +39,11 @@ class SantanderValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(SantanderValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(BanrisulValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 8;
+        return 9;
     }
 
 }

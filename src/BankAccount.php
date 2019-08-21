@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace BankAccountValidator\src;
 
 class BankAccount
 {
 
-    static function validator($bankNumber) {
+    private static function validator($bankNumber) {
 
         $validators = array(
             "001" => BancoDoBrasilValidator::class,
@@ -24,7 +24,7 @@ class BankAccount
         }
     }
 
-    static function validate($params){
+    public static function validate($params){
 
         $errors = array();
         $validator = BankAccount::validator($params->bankNumber);

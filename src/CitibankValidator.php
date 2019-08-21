@@ -1,10 +1,8 @@
 <?php
 
+namespace BankAccountValidator\src;
 
-namespace App\Models;
-
-
-class BanrisulValidator
+class CitibankValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -16,7 +14,7 @@ class BanrisulValidator
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == BanrisulValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == CitibankValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
@@ -28,8 +26,7 @@ class BanrisulValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        $checkNumberCalculated = BanrisulCheckNumberCalculator::calculate($bankAccount->accountNumber);
-        return $checkNumberCalculated === $bankAccount->accountCheckNumber;
+        return true;
     }
 
     static function agencyNumberMsgError() {
@@ -41,11 +38,11 @@ class BanrisulValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(BanrisulValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(CitibankValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 9;
+        return 7;
     }
 
 }

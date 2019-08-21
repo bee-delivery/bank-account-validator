@@ -1,99 +1,54 @@
 # Bank Account Validator
 
-One Paragraph of project description goes here
+A bank account validator for brazilian bank accounts.
 
-## Getting Started
+## Getting started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Bank account validation is performed under the rules of the following banks: Itaú, Bradesco, Banco do Brasil, Santander, Citibank and HSBC. For other banks a default validation is performed:
 
-### Prerequisites
+* Agency from 1 to 5 numbers.
+* 0-2 character agency digit.
+* Account from 1 to 12 numbers.
+* 0-2 character account digit.
 
-What things you need to install the software and how to install them
+The agency and account number of banks Itaú, Bradesco, and Banco do Brasil are validated by calculating the check digit (similar to CPF validation).
 
-```
-Give examples
-```
 
-### Installing
+## Installing
+Install with [composer](https://getcomposer.org/):
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
+```bash
+composer require bee-delivery/bank-account-validator-php
 ```
 
-And repeat
+## Usage
 
-```
-until finished
-```
+The bank details received via the form must be passed as a parameter to the function called 'validate'.
+If it was found errors, they will be returned within an array.
 
-End with an example of getting some data out of the system or using it for a little demo
+```php
+<?php
 
-## Running the tests
+    //..
 
-Explain how to run the automated tests for this system
+    $params = (object) array(
+        'bankNumber' => $this->bank,
+        'agencyNumber' => $this->agency_number,
+        'agencyCheckNumber' => $this->agency_check_number,
+        'accountNumber' => $this->account_number,
+        'accountCheckNumber' => $this->account_check_number
+    );
 
-### Break down into end to end tests
+    $errors = BankAccount::validate($params);
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-            $params = (object) array(
-                'bankNumber' => $this->bank,
-                'agencyNumber' => $this->agency_number,
-                'agencyCheckNumber' => $this->agency_check_number,
-                'accountNumber' => $this->account_number,
-                'accountCheckNumber' => $this->account_check_number
-            );
-
-            $errors = BankAccount::validate($params);
-
-            if (count($errors)) {
-                return view('home', compact('errors'));
-            }
+    // ..
 ```
 
-## Deployment
+## Bank Codes
 
-Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+A listing of all banks you can get at http://www.codigobanco.com.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+GPL 2.1

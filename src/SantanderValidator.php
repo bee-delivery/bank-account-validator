@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace BankAccountValidator\src;
 
-class HSBCValidator
+class SantanderValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -10,15 +10,15 @@ class HSBCValidator
     }
 
     static function agencyCheckNumberIsValid($agencyCheckNumber) {
-        return  empty($agencyCheckNumber) || $agencyCheckNumber === "";
+        return empty($agencyCheckNumber) || $agencyCheckNumber === "";
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == HSBCValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == SantanderValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
-        return true;
+        return CommonBankAccountValidator::accountCheckNumberIsValid($accountCheckNumber);
     }
 
     static function agencyCheckNumberMatch($bankAccount) {
@@ -38,11 +38,11 @@ class HSBCValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(HSBCValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(SantanderValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 6;
+        return 8;
     }
 
 }

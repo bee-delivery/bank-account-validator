@@ -1,10 +1,8 @@
 <?php
 
+namespace BankAccountValidator\src;
 
-namespace App\Models;
-
-
-class CitibankValidator
+class ItauValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -12,11 +10,11 @@ class CitibankValidator
     }
 
     static function agencyCheckNumberIsValid($agencyCheckNumber) {
-        return empty($agencyCheckNumber) || $agencyCheckNumber === "";
+        return  empty($agencyCheckNumber) || $agencyCheckNumber === "";
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == CitibankValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == ItauValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
@@ -28,7 +26,8 @@ class CitibankValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        return true;
+        $checkNumberCalculated = ItauCheckNumberCalculator::calculate($bankAccount->agencyNumber, $bankAccount->accountNumber);
+        return $checkNumberCalculated === $bankAccount->accountCheckNumber;
     }
 
     static function agencyNumberMsgError() {
@@ -40,11 +39,11 @@ class CitibankValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(CitibankValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(ItauValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 7;
+        return 5;
     }
 
 }
