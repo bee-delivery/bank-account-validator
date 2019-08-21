@@ -51,4 +51,4 @@ A listing of all banks you can get at http://www.codigobanco.com.
 
 ## License
 
-GPL 2.1
+GNU General Public License v3
