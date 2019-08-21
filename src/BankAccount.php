@@ -1,6 +1,6 @@
 <?php
 
-namespace BankAccountValidator\src;
+namespace BeeDelivery\BankAccountValidator;
 
 class BankAccount
 {
