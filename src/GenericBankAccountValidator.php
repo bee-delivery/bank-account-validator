@@ -12,7 +12,7 @@ class GenericBankAccountValidator
 
     static function agencyNumberIsValid($agencyNumber)
     {
-        return preg_match("/^[0-9]{1,5}$/", $agencyNumber) && intval($agencyNumber) > 0;
+        return preg_match("/^[0-9]{1,4}$/", $agencyNumber) && intval($agencyNumber) > 0;
     }
 
     static function agencyCheckNumberIsValid($agencyCheckNumber)
@@ -53,5 +53,9 @@ class GenericBankAccountValidator
     static function accountNumberMsgError($length = null)
     {
         return "Conta corrente inválida";
+    }
+
+    static function accountNumberLength() {
+        return 12;
     }
 }

@@ -22,7 +22,7 @@ class InterValidator
     }
 
     static function agencyCheckNumberMatch($bankAccount) {
-        return empty($agencyCheckNumber) || $agencyCheckNumber === "";
+        return empty($bankAccount->agencyCheckNumber) || $bankAccount->agencyCheckNumber === "";
     }
 
     static function accountCheckNumberMatch($bankAccount) {
