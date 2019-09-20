@@ -26,7 +26,10 @@ class CitibankValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        return true;
+        $checkNumberCalculated = CitibankCheckNumberCalculator::calculate($bankAccount->accountNumber);
+        $checkNumberInformed = strtoupper($bankAccount->accountCheckNumber);
+
+        return $checkNumberCalculated === $checkNumberInformed;
     }
 
     static function agencyNumberMsgError() {
@@ -42,7 +45,7 @@ class CitibankValidator
     }
 
     static function accountNumberLength() {
-        return 7;
+        return 10;
     }
 
 }

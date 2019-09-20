@@ -12,7 +12,7 @@ class CommonBankAccountValidator
 
     static function agencyCheckNumberIsValid($agencyCheckNumber)
     {
-        return preg_match("/^[a-zA-Z0-9]{0,1}$/", $agencyCheckNumber);
+        return preg_match("/^[a-zA-Z0-9]{0,2}$/", $agencyCheckNumber);
     }
 
     static function accountNumberIsValid($accountNumber)

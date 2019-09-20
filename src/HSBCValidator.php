@@ -26,7 +26,10 @@ class HSBCValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        return true;
+        $checkNumberCalculated = HSBCCheckNumberCalculator::calculate($bankAccount->accountNumber, $bankAccount->agencyNumber);
+        $checkNumberInformed = strtoupper($bankAccount->accountCheckNumber);
+
+        return $checkNumberCalculated === $checkNumberInformed;
     }
 
     static function agencyNumberMsgError() {

@@ -43,7 +43,8 @@ class BradescoCheckNumberCalculator
             $seq = 5 - $i;
             $sumSeq += (intval($numbers[$i]) * $seq);
         }
-          return BradescoCheckNumberCalculator::agencyModule($sumSeq);
+
+        return BradescoCheckNumberCalculator::agencyModule($sumSeq);
     }
 
     static function agencyModule($sumSeq) {

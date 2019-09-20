@@ -2,7 +2,7 @@
 
 namespace BeeDelivery\BankAccountValidator;
 
-class SantanderValidator
+class InterValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -14,7 +14,7 @@ class SantanderValidator
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == SantanderValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == InterValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
@@ -22,14 +22,12 @@ class SantanderValidator
     }
 
     static function agencyCheckNumberMatch($bankAccount) {
-        return true;
+        return empty($agencyCheckNumber) || $agencyCheckNumber === "";
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        $checkNumberCalculated = SantanderCheckNumberCalculator::calculate($bankAccount->accountNumber, $bankAccount->agencyNumber);
-        $checkNumberInformed = strtoupper($bankAccount->accountCheckNumber);
-
-        return $checkNumberCalculated === $checkNumberInformed;
+        $checkNumberCalculated = InterCheckNumberCalculator::calculateAccount($bankAccount->accountNumber);
+        return $checkNumberCalculated === strtoupper($bankAccount->accountCheckNumber);
     }
 
     static function agencyNumberMsgError() {
@@ -41,11 +39,11 @@ class SantanderValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(SantanderValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(InterValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 8;
+        return 7;
     }
 
 }

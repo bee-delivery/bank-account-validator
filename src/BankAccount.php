@@ -8,13 +8,18 @@ class BankAccount
     private static function validator($bankNumber) {
 
         $validators = array(
-            "001" => BancoDoBrasilValidator::class,
-            "237" => BradescoValidator::class,
-            "341" => ItauValidator::class,
-            "033" => SantanderValidator::class,
-            "745" => CitibankValidator::class,
-            "399" => HSBCValidator::class,
-            "041" => BanrisulValidator::class
+            "001" => BancoDoBrasilValidator::class,         // Banco do Brasil
+            "004" => BancoDoNordesteValidator::class,       // Banco do Nordeste
+            "033" => SantanderValidator::class,             // Santander
+            "041" => BanrisulValidator::class,              // Banrisul
+            "077" => InterValidator::class,                 // Inter
+            "104" => CaixaEconomicaFederalValidator::class, // Caixa Econômica Federal
+            "212" => OriginalValidator::class,              // Original
+            "237" => BradescoValidator::class,              // Bradesco | Next
+            "260" => NubankValidator::class,                // Nubank
+            "341" => ItauValidator::class,                  // Itaú
+            "399" => HSBCValidator::class,                  // HSBC
+            "745" => CitibankValidator::class               // Citibank
         );
 
         if (isset($validators[$bankNumber])) {
@@ -28,6 +33,14 @@ class BankAccount
 
         $errors = array();
         $validator = BankAccount::validator($params->bankNumber);
+
+        // fill with zeros
+        for($i = strlen($params->accountNumber); $i < $validator::accountNumberLength(); $i++)
+            $params->accountNumber = "0" . $params->accountNumber;
+
+        for($i = strlen($params->agencyNumber); $i < 4; $i++)
+            $params->agencyNumber = "0" . $params->agencyNumber;
+        // end fill
 
         if (!GenericBankAccountValidator::bankNumberIsValid($params->bankNumber)) {
             array_push($errors, (object) array('description' => "Banco inválido", 'code' => "INVALID_BANK_NUMBER"));
@@ -61,6 +74,6 @@ class BankAccount
             }
         }
 
-        return $errors;
+        return array('errors' => $errors, 'params' => $params);
     }
 }

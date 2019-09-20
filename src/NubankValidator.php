@@ -2,7 +2,7 @@
 
 namespace BeeDelivery\BankAccountValidator;
 
-class SantanderValidator
+class NubankValidator
 {
 
     static function agencyNumberIsValid($agencyNumber) {
@@ -14,7 +14,7 @@ class SantanderValidator
     }
 
     static function accountNumberIsValid($accountNumber) {
-        return strlen($accountNumber) == SantanderValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
+        return strlen($accountNumber) == NubankValidator::accountNumberLength() && CommonBankAccountValidator::accountNumberIsValid($accountNumber);
     }
 
     static function accountCheckNumberIsValid($accountCheckNumber) {
@@ -26,7 +26,7 @@ class SantanderValidator
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        $checkNumberCalculated = SantanderCheckNumberCalculator::calculate($bankAccount->accountNumber, $bankAccount->agencyNumber);
+        $checkNumberCalculated = NubankCheckNumberCalculator::calculateAccount($bankAccount->accountNumber);
         $checkNumberInformed = strtoupper($bankAccount->accountCheckNumber);
 
         return $checkNumberCalculated === $checkNumberInformed;
@@ -41,11 +41,11 @@ class SantanderValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(SantanderValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(NubankValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {
-        return 8;
+        return 7;
     }
 
 }

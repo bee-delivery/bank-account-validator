@@ -10,7 +10,7 @@ class BanrisulValidator
     }
 
     static function agencyCheckNumberIsValid($agencyCheckNumber) {
-        return empty($agencyCheckNumber) || $agencyCheckNumber === "";
+        return strlen($agencyCheckNumber) == self::agencyCheckNumberLength() && CommonBankAccountValidator::agencyCheckNumberIsValid($agencyCheckNumber);
     }
 
     static function accountNumberIsValid($accountNumber) {
@@ -22,12 +22,13 @@ class BanrisulValidator
     }
 
     static function agencyCheckNumberMatch($bankAccount) {
-        return true;
+        $checkNumberCalculated = BanrisulCheckNumberCalculator::calculateAgency($bankAccount->agencyNumber);
+        return $checkNumberCalculated == $bankAccount->agencyCheckNumber;
     }
 
     static function accountCheckNumberMatch($bankAccount) {
-        $checkNumberCalculated = BanrisulCheckNumberCalculator::calculate($bankAccount->accountNumber);
-        return $checkNumberCalculated === $bankAccount->accountCheckNumber;
+        $checkNumberCalculated = BanrisulCheckNumberCalculator::calculateAccount($bankAccount->accountNumber);
+        return $checkNumberCalculated == $bankAccount->accountCheckNumber;
     }
 
     static function agencyNumberMsgError() {
@@ -40,6 +41,10 @@ class BanrisulValidator
 
     static function accountNumberMsgError() {
         return CommonBankAccountValidator::accountNumberMsgError(BanrisulValidator::accountNumberLength());
+    }
+
+    static function agencyCheckNumberLength() {
+        return 2;
     }
 
     static function accountNumberLength() {
