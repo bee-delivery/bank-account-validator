@@ -38,7 +38,6 @@ composer require bee-delivery/bank-account-validator
 ## Usage
 
 The bank details received via the form must be passed as a parameter to the function called 'validate'.
-If it was found errors, they will be returned within an array.
 
 ```php
 <?php
@@ -55,10 +54,12 @@ If it was found errors, they will be returned within an array.
         'accountCheckNumber' => $this->account_check_number
     );
 
-    $errors = BankAccount::validate($params);
+    $data = BankAccount::validate($params);
 
     // ..
 ```
+
+It will return an array with two attributes: 'params' with params formatted properly and 'errors' containing possible errors found.
 
 ## Bank Codes
 
