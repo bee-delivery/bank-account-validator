@@ -4,21 +4,22 @@ A bank account validator for brazilian bank accounts.
 
 ## Getting started
 
-Bank account validation is performed under the verifying digit rules of the following banks: 
+Bank account validation is performed under the verifying digit rules of the following banks (values based on char count):
 
-BANK                        AG - DV | AC - DV | TYPE AC          | OBS
-001 Banco do Brasil		    4  -  1 | 8  -  1 |	                 |   
-004 Banco do Nordeste	    4  		| 7  -  1 | 2 (not included) | not checking DVs	
-033 Banco Santander		    4  		| 8  -  1 | 2 (added to AC)	 |		
-041 Banrisul			    4  -  2 | 9  -  1 | 2 (added to AC)	 |		
-077 Banco Inter			    4       | 7  -  1 |	                 |
-104 Caixa Econômica Federal	4  	    | 11 -  1 | 3 (added to AC)	 |
-237 Banco Bradesco		    4  -  1 | 7  -  1 |                  |
-237 Next bank			    4  		| 7  -  1 |                  | same thing as Bradesco
-260 Nubank			        4  		| 7  -  1 |                  |
-341 Banco Itaú			    4  		| 5  -  1 |                  |
-399 HSBC			        4  		| 6  -  1 |                  |               
-745 Citibank			    4  		| 10 -  1 |                  |               
+| BANK | AG - DV | AC - DV | TYPE AC | OBS |
+| --- | --- | --- | --- | --- |
+| 001 Banco do Brasil | 4  -  1 | 8  -  1 |	| |  
+| 004 Banco do Nordeste	| 4 | 7  -  1 | 2 (not included) | not checking DVs	|
+| 033 Banco Santander | 4 | 8  -  1 | 2 (added to AC) | |	
+| 041 Banrisul | 4  -  2 | 9  -  1 | 2 (added to AC) | |		
+| 077 Banco Inter | 4 | 7  -  1 | | |
+| 104 Caixa Econômica Federal | 4 | 11 -  1 | 3 (added to AC) | |
+| 237 Banco Bradesco | 4  -  1 | 7  -  1 | | |
+| 237 Next bank	| 4 | 7  -  1 |  | same thing as Bradesco |
+| 260 Nubank | 4 | 7  -  1 | | |
+| 341 Banco Itaú | 4 | 5  -  1 | | |
+| 399 HSBC | 4 | 6  -  1 |  | |         
+| 745 Citibank | 4 | 10 -  1 |  | |   
 
 For other banks a default validation is performed:
 
