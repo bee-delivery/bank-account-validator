@@ -5,7 +5,7 @@ namespace BeeDelivery\BankAccountValidator;
 class BankAccount
 {
 
-    private static function validator($bankNumber)
+    private static function validator($bankNumber, $ignoreTypeCEFAccount = false)
     {
 
         $validators = array(
@@ -23,7 +23,7 @@ class BankAccount
             "745" => CitibankValidator::class               // Citibank
         );
 
-        if (isset($validators[$bankNumber])) {
+        if (isset($validators[$bankNumber]) and !$ignoreTypeCEFAccount) {
             return $validators[$bankNumber];
         } else {
             return GenericBankAccountValidator::class;
@@ -34,7 +34,9 @@ class BankAccount
     {
 
         $errors = array();
-        $validator = BankAccount::validator($params->bankNumber);
+        $ignoreTypeCEFAccount = isset($params->ignoreTypeCEFAccount)? $params->ignoreTypeCEFAccount : false;
+
+        $validator = BankAccount::validator($params->bankNumber, $ignoreTypeCEFAccount);
 
         // fill with zeros
         for ($i = strlen($params->accountNumber); $i < $validator::accountNumberLength(); $i++)

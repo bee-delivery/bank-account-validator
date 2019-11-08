@@ -56,6 +56,6 @@ class GenericBankAccountValidator
     }
 
     static function accountNumberLength() {
-        return 12;
+        return 11;
     }
 }

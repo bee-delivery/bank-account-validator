@@ -38,7 +38,7 @@ class OriginalValidator
     }
 
     static function accountNumberMsgError() {
-        return CommonBankAccountValidator::accountNumberMsgError(CitibankValidator::accountNumberLength());
+        return CommonBankAccountValidator::accountNumberMsgError(OriginalValidator::accountNumberLength());
     }
 
     static function accountNumberLength() {

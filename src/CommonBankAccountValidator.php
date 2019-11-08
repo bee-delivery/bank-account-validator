@@ -31,7 +31,7 @@ class CommonBankAccountValidator
             $length = CommonBankAccountValidator::agencyNumberLength();
         }
 
-        return "A agência deve conter " . $length . " números. Complete com zeros a esquerda se necessário.";
+        return "A agência deve conter " . $length . " números.";
     }
 
     static function agencyCheckNumberMsgError($length = null)
@@ -41,13 +41,13 @@ class CommonBankAccountValidator
         } else if ($length === 1) {
             return "O dígito da agência deve conter 1 dígito";
         } else {
-            return "O dígito da agência deve conter " . $length . " números. Complete com zeros a esquerda se necessário.";
+            return "O dígito da agência deve conter " . $length . " números.";
         }
     }
 
     static function accountNumberMsgError($length)
     {
-        return "A conta corrente deve conter " . $length . " números. Complete com zeros a esquerda se necessário.";
+        return "A conta corrente deve conter " . $length . " números.";
     }
 
     static function agencyNumberLength()
