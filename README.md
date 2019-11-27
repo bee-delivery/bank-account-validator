@@ -53,7 +53,8 @@ The bank details received via the form must be passed as a parameter to the func
         'agencyCheckNumber' => $this->agency_check_number,
         'accountNumber' => $this->account_number,
         'accountCheckNumber' => $this->account_check_number,
-        'ignoreAgencyCheckNumber' => true // or false
+        'ignoreAgencyCheckNumber' => true, // or false
+        'ignoreTypeCEFAccount' => true // or false
     );
 
     $data = BankAccount::validate($params);

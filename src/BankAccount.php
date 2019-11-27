@@ -23,7 +23,9 @@ class BankAccount
             "745" => CitibankValidator::class               // Citibank
         );
 
-        if (isset($validators[$bankNumber]) and !$ignoreTypeCEFAccount) {
+        if ($bankNumber == '104' and $ignoreTypeCEFAccount) {
+            return GenericBankAccountValidator::class;
+        } else if (isset($validators[$bankNumber])) {
             return $validators[$bankNumber];
         } else {
             return GenericBankAccountValidator::class;

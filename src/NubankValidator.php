@@ -45,7 +45,7 @@ class NubankValidator
     }
 
     static function accountNumberLength() {
-        return 7;
+        return 8;
     }
 
 }
