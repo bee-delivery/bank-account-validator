@@ -45,7 +45,7 @@ class CaixaEconomicaFederalValidator
     }
 
     static function accountNumberLength() {
-        return 11;
+        return 12;
     }
 
 }

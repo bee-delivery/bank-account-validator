@@ -31,7 +31,7 @@ class CaixaEconomicaFederalCheckNumberCalculator
     }
 
     static function multiplyAccordingWeightAccount($number, $i) {
-        $weight = array(9,8,7,6,5,4,3,2);
+        $weight = array(2,9,8,7,6,5,4,3,2);
         return $number * $weight[$i];
     }
 
