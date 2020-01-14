@@ -25,6 +25,8 @@ class InterCheckNumberCalculator
         $result = 11 - ($sumSeq % 11);
         if ($result > 9) {
             return "0";
-        }
+        } 
+        
+        return strval($result);
     }
 }
